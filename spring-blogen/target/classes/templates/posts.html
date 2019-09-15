@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="base :: header"></head>
+<!--Title-->
+<title> Blogen | Posts</title>
+<!--Menu-->
+<nav th:insert="header :: menu"></nav>
+<!-- Header -->
+<section id="main-header" class="py-2 bg-primary text-white mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1><i class="fas fa-pencil-alt"></i> Posts</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  Search-->
+
+<section id="search" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ml-auto">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search Posts...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  Actions -->
+
+<section id="actions" class="py-4 mb-4 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
+                    <i class="fas fa-plus"></i> Add Post
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Posts Section -->
+<section id="posts">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Latest Posts</h4>
+                    </div>
+                    <table class=" table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Created By</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="post : ${posts}">
+                            <td th:text="${post.id}"></td>
+                            <td th:text="${post.title}"></td>
+                            <td th:text="${post.category}"></td>
+                            <td th:text="${post.date}"></td>
+                            <td th:text="${post.createdBy}"></td>
+                            <td><a th:href="@{'/posts/details/' + ${post.id }}" class="btn btn-secondary">
+                                <i class="fas fa-angle-double-right"></i> Details
+                            </a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ADD POST MODAL -->
+<div class="modal fade" id="addPostModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Add Post</h5>
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/posts/add" method="post">
+                    <div class="form-group">
+                        <label for="titulo">Title</label>
+                        <input class="form-control"  id="titulo" name="title" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select class="form-control" id="category" name="category">
+                            <option th:each="category : ${categories}" th:text="${category}"
+                                    th:value="${category}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Upload Image</label>
+                        <div class="custom-file">
+                            <input class="custom-file-input" id="image" type="file">
+                            <label class="custom-file-label" for="image">Choose File</label>
+                        </div>
+                        <small class="form-text text-muted">Max Size 3mb</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Body</label>
+                        <textarea class="form-control" id="body" name="editor"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<section th:insert="base :: footer"></section>

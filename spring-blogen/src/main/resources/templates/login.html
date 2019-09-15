@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:insert="base :: header"></head>
+<!--Title-->
+<title> Blogen | Login</title>
+<body>
+    <!-- Header -->
+    <section id="main-header" class="py-2 bg-primary text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1><i class="fas fa-user"></i> Blogen Admin</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Log In -->
+    <section id="login" class="container mt-5">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Account Login</h4>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/logged}" method="post">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" name="username" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" class="form-control">
+                                </div>
+                                <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                            </form>
+                        </div>
+                    </div>
+                    <p>Dont have an account? Register<a th:href="@{/register}"> Here</a></p>
+                    <span class="text-danger" th:text="${msg}"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<section th:fragment="footer">
+    <footer id="main-footer" class="bg-dark text-white p-4 fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="lead text-center">
+                        Copyright &copy;
+                        <span id="year"></span>
+                        Blogen Admin
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</section>

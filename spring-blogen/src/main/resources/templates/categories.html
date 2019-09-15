@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="base :: header"></head>
+<!--Title-->
+<title> Blogen | Categories</title>
+<!--Menu-->
+<nav th:insert="header :: menu"></nav>
+
+<!-- Header -->
+<section class="py-2 bg-success text-white mt-5" id="main-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1><i class="fas fa-folder"></i> Categories</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  Search-->
+
+<section class="py-4 mb-4 bg-light" id="search">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 ml-auto">
+                <div class="input-group">
+                    <input class="form-control" placeholder="Search Categories..." type="text">
+                    <div class="input-group-append">
+                        <button class="btn btn-success">
+                            Search
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  Actions -->
+<section class="py-4 mb-4" id="actions">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a class="btn btn-success btn-block" data-target="#addCategoryModal" data-toggle="modal" href="#">
+                    <i class="fas fa-plus"></i> Add Categories
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories -->
+<section id="categories">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Latest Categories</h4>
+                    </div>
+                    <table class=" table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="category : ${categories}">
+                            <td th:text="${category.id}"></td>
+                            <td th:text="${category.name}"></td>
+                            <td th:text="${category.date}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ADD CATEGORY MODAL -->
+<div class="modal fade" id="addCategoryModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-sucess text-white">
+                <h5 class="modal-title">Add Category</h5>
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/categories/add" method="POST">
+                    <div class="form-group">
+                        <label for="name">Title</label>
+                        <input class="form-control" id="name" name="name" type="text">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<section th:insert="base :: footer"></section>
